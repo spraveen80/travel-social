@@ -1,4 +1,11 @@
 TravelOnRails3::Application.routes.draw do
+  root :to => 'pages#home'
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy'
+  match '/contact', to: 'pages#contact'
+  match '/about', to: 'pages#about'
+  match '/help', to: 'pages#help'
+  match '/signup', to: 'users#new'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +55,6 @@ TravelOnRails3::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
