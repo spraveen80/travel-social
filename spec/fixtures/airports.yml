@@ -1,0 +1,40 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# India cities
+Chennai Airport:
+  iata_code: MAA
+  name: Chennai International Airport
+  city: Chennai
+
+Bengaluru Airport:
+  iata_code: BLR
+  name: Bengaluru International Airport
+  city: Bangalore
+
+Delhi Airport:
+  iata_code: DEL
+  name: Indira Gandhi International Airport
+  city: Delhi
+
+Kolkata Airport:
+  iata_code: CCU
+  name: Netaji Subhash Chandra Bose International Airport
+  city: Kolkata
+
+# USA cities
+KansasCity Airport:
+  iata_code: MCI
+  name: Kansas City International Airport
+  city: KansasCity
+
+# UK cities
+London Airport:
+  iata_code: LHR
+  name: London Heathrow Airport
+  city: London
+
+# Germany cities
+Frankfurt Airport:
+  iata_code: FRA
+  name: Frankfurt International Airport
+  city: Frankfurt

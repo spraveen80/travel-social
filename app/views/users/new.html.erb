@@ -1,7 +1,9 @@
 <h2>Sign up</h2>
 
-<% form_for(@user) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@user) do |f| %>
+  <% @user.errors.full_messages.each do |msg| %>
+      <div class="flash error"><%= msg %></div>
+   <% end %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>

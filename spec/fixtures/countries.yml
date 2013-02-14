@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+India:
+  name: India
+  abbr: IN
+
+USA:
+  name: United States of America
+  abbr: US
+
+UK:
+  name: United Kingdom
+  abbr: GB
+
+Germany:
+  name: Germany
+  abbr: DE

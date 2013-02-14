@@ -1,0 +1,33 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# India cities
+Chennai:
+  name: Chennai
+  country: India
+
+Bangalore:
+  name: Bengaluru
+  country: India
+
+Delhi:
+  name: Delhi
+  country: India
+
+Kolkata:
+  name: Kolkata
+  country: India
+
+# USA cities
+KansasCity:
+  name: Kansas City
+  country: USA
+
+# UK cities
+London:
+  name: London
+  country: UK
+
+# Germany cities
+Frankfurt:
+  name: Frankfurt
+  country: Germany
