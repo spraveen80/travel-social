@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: airlines
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  alias      :string(255)
+#  iata_code  :string(255)
+#  icao_code  :string(255)
+#  callsign   :string(255)
+#  active     :boolean
+#  country_id :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'spec_helper'
 
 describe Airline do

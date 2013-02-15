@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: airports
+#
+#  id         :integer          not null, primary key
+#  icao_code  :string(255)
+#  name       :string(255)
+#  city_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#  iata_code  :string(255)
+#  latitude   :float
+#  longitude  :float
+#  altitude   :integer
+#  timezone   :float
+#  dst        :string(255)
+#
+
 class Airport < ActiveRecord::Base
   attr_readonly :name, :icao_code
 
