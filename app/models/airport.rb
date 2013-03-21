@@ -17,7 +17,7 @@
 #
 
 class Airport < ActiveRecord::Base
-  attr_readonly :name, :icao_code
+  attr_protected :name, :icao_code, :iata_code
 
   belongs_to :city
 
