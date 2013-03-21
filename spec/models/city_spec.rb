@@ -16,11 +16,13 @@ describe City do
   before(:each) do
     @country = Factory(:country)
     @country2 = Factory(:united_states)
-    @attr = { :name => "Chennai" }
+    @city_name = "Chennai"
   end
 
   it "should create a new instance given valid attributes" do
-    @country.cities.create!(@attr)
+    @city = @country.cities.new
+    @city.name = @city_name
+    @city.save!
   end
 
   describe "country associations" do
@@ -39,6 +41,11 @@ describe City do
     end
   end
 
+  def get_valid_city
+    valid_city = @country.cities.new
+    valid_city.name = @city_name
+    return valid_city
+  end
   describe "validations" do
 
     it "should require a country id" do
@@ -46,33 +53,43 @@ describe City do
     end
 
     it "should require a name attribute" do
-      @country.cities.build(:name => "").should_not be_valid
+      city = @country.cities.new
+      city.should_not be_valid
     end
 
     it "should reject duplicate city name within the same country" do
-      valid_city = @country.cities.create(@attr)
+      valid_city = get_valid_city
+      valid_city.save!
       lambda do
-        @country.cities.create!(@attr)
+        another_city = @country.cities.new
+        another_city.name = @city_name
+        another_city.save!
       end.should raise_error(ActiveRecord::RecordInvalid, /name has already been taken/i)
     end
 
     it "should allow same city name to exist in different countries" do
-      @city = @country.cities.create!(@attr)
-      @country2.cities.create!(@attr).should be_valid
+      valid_city = get_valid_city
+      valid_city.save!
+      another_valid_city = @country2.cities.new
+      another_valid_city.name = @city_name
+      another_valid_city.save!
+      another_valid_city.should be_valid
     end
 
     it "should reject any updates to the name field" do
-      valid_city = @country.cities.create!(@attr)
+      valid_city = get_valid_city
       lambda do
         valid_city.update(:name => "Mumbai")
-      end.should raise_error(NoMethodError, "Attempt to call private method")
+      end.should raise_error(NoMethodError, /private method ['|`]update['|`] called/i)
     end
   end
 
   describe "airport association" do
 
     before(:each) do
-      @city = @country.cities.create!(@attr)
+      @city = @country.cities.new
+      @city.name = @city_name
+      @city.save!
       @a1 = Factory(:airport, :city => @city)
       @a2 = Factory(:airport, :city => @city, :name => "Kansas City Downtown Municipal Airport", :iata_code => "MKC", :icao_code => "KMKC")
     end

@@ -10,7 +10,7 @@
 #
 
 class City < ActiveRecord::Base
-  attr_readonly :name
+  attr_protected :name
 
   belongs_to :country
   has_many :airports, :dependent => :destroy

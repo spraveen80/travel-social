@@ -9,7 +9,7 @@
 #
 
 class Country < ActiveRecord::Base
-  attr_readonly :name
+  attr_protected :name
 
   has_many :cities,   :dependent => :destroy
   has_many :airlines, :dependent => :destroy

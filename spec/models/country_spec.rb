@@ -13,38 +13,48 @@ require 'spec_helper'
 describe Country do
 
   before(:each) do
-    @attr = {
-        :name => "India",
-    }
+    @country_name = "India"
+  end
+
+  def get_valid_country
+    country = Country.new
+    country.name = @country_name
+    return country
   end
 
   it "should create a new instance given valid attributes" do
-    Country.create!(@attr)
+    country = Country.new
+    country.name = @country_name
   end
 
   it "should require a name" do
-    no_name_country = Country.new(@attr.merge(:name => ""))
+    no_name_country = Country.new
     no_name_country.should_not be_valid
   end
 
   it "should reject duplicate country name" do
-    valid_country = Country.create!(@attr)
+    valid_country = get_valid_country
+    valid_country.save!
     lambda do
-      Country.create!(@attr)
+      another_country = Country.new
+      another_country.name = @country_name
+      another_country.save!
     end.should raise_error(ActiveRecord::RecordInvalid, /name has already been taken/i)
   end
 
   it "should reject any updates to the name field" do
-    valid_country = Country.create!(@attr)
+    valid_country = get_valid_country
     lambda do
       valid_country.update(:name => "INDIA")
-    end.should raise_error(NoMethodError, "Attempt to call private method")
+    end.should raise_error(NoMethodError, /private method ['|`]update['|`] called/i)
   end
 
   describe "city association" do
 
     before(:each) do
-      @country = Country.create(@attr)
+      @country = Country.new
+      @country.name = @country_name
+      @country.save!
       @c1 = Factory(:city, :country => @country)
       @c2 = Factory(:city, :country => @country, :name => "Mumbai")
     end
@@ -66,7 +76,9 @@ describe Country do
   describe "airline association" do
 
     before(:each) do
-      @country = Country.create(@attr)
+      @country = Country.new
+      @country.name = @country_name
+      @country.save!
       @a1 = Factory(:airline, :country => @country)
       @a2 = Factory(:airline, :country => @country, :name => "American Airlines", :iata_code => "AA", :icao_code => "AAL")
     end
