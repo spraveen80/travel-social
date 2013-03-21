@@ -144,5 +144,11 @@ describe Airport do
         valid_airport.update(:icao_code => "KCI")
       end.should raise_error(NoMethodError, /private method ['|`]update['|`] called/i)
      end
+
+     it "should not allow access to country_id" do
+      lambda do
+        Airport.new(city_id: @city.id)
+      end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
+    end
   end
 end

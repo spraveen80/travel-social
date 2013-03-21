@@ -15,7 +15,7 @@
 #
 
 class Airline < ActiveRecord::Base
-  attr_protected :name, :alias, :iata_code, :icao_code, :callsign, :active
+  attr_protected :name, :alias, :iata_code, :icao_code, :callsign, :active, :country_id
 
   belongs_to :country
 

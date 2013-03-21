@@ -46,6 +46,7 @@ describe City do
     valid_city.name = @city_name
     return valid_city
   end
+
   describe "validations" do
 
     it "should require a country id" do
@@ -81,6 +82,12 @@ describe City do
       lambda do
         valid_city.update(:name => "Mumbai")
       end.should raise_error(NoMethodError, /private method ['|`]update['|`] called/i)
+    end
+
+    it "should not allow access to country_id" do
+      lambda do
+        City.new(country_id: @country.id)
+      end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
   end
 

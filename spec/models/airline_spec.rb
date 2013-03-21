@@ -170,6 +170,12 @@ describe Airline do
         valid_airline.update(:active => "N")
       end.should raise_error(NoMethodError, /private method ['|`]update['|`] called/i)
      end
+
+     it "should not allow access to country_id" do
+      lambda do
+        Airline.new(country_id: @country.id)
+      end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
+    end
   end
 
 end
