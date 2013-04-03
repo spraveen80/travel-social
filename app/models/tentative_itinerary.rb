@@ -22,10 +22,9 @@ class TentativeItinerary < Itinerary
   validate              :airport_validation
 
   # validates_existence is not natively supported in rails. It requires a plugin which
-  # can be installed using:
-  # script/plugin install http://svn.hasmanythrough.com/public/plugins/validates_existence/
-  #validates_existence_of :start_airport
-  #validates_existence_of :dest_airport
+  # can be installed using by specifying gem "validates_existence", "0.5.3" in the Gemfile
+  validates_existence_of :start_airport
+  validates_existence_of :dest_airport
 
   private
     def airport_validation

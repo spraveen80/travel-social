@@ -18,7 +18,6 @@ describe Itinerary do
   before(:each) do
     @user = Factory(:user)
     @attr = {
-      :user => @user,
       :type => "Itinerary",
       :passenger_name => "John Doe",
       :need_help => false,
@@ -26,22 +25,39 @@ describe Itinerary do
     }
   end
 
+  def get_valid_itinerary
+    return get_itinerary(@attr)
+  end
+
+  def get_itinerary(attr)
+    itinerary = @user.itineraries.new
+    populate(itinerary,attr)
+    return itinerary
+  end
+
+  def populate(itinerary, attr)
+    itinerary.type = attr[:type]
+    itinerary.passenger_name = attr[:passenger_name]
+    itinerary.need_help = attr[:need_help]
+    itinerary.willing_to_help = attr[:willing_to_help]
+  end
+
   it "should create a new instance given valid attributes" do
-    @user.itineraries.create!(@attr)
+    get_valid_itinerary.save!
   end
 
   describe "validations" do
 
     it "should require a passenger name" do
-      @user.itineraries.build(@attr.merge(:passenger_name => "")).should_not be_valid
+      get_itinerary(@attr.merge(:passenger_name => "")).should_not be_valid
     end
 
     it "should require a passenger name that does not exceed 100 characters in length" do
-      @user.itineraries.build(@attr.merge(:passenger_name => "a" * 101)).should_not be_valid
+      get_itinerary(@attr.merge(:passenger_name => "a" * 101)).should_not be_valid
     end
 
     it "should not have both need_help and willing_to_help set" do
-      @user.itineraries.build(@attr.merge(:need_help => true, :willing_to_help => true)).should_not be_valid
+      get_itinerary(@attr.merge(:need_help => true, :willing_to_help => true)).should_not be_valid
     end
 
     # Rails does not allow type to be validated. Adding validates_existence_of :type in 
@@ -56,7 +72,7 @@ describe Itinerary do
   describe "user association" do
 
     before(:each) do
-      @itin = @user.itineraries.create(@attr)
+      @itin = get_valid_itinerary
     end
 
     it "should have a user attribute" do

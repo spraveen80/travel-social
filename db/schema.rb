@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(:version => 20120405120815) do
     t.string   "callsign"
     t.boolean  "active"
     t.integer  "country_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "airlines", ["iata_code"], :name => "index_airlines_on_iata_code"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(:version => 20120405120815) do
     t.string   "icao_code"
     t.string   "name"
     t.integer  "city_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "iata_code"
     t.float    "latitude"
     t.float    "longitude"
@@ -50,14 +50,14 @@ ActiveRecord::Schema.define(:version => 20120405120815) do
   create_table "cities", :force => true do |t|
     t.string   "name"
     t.integer  "country_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "countries", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "flights", :force => true do |t|
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(:version => 20120405120815) do
     t.date     "arr_date"
     t.time     "arr_time"
     t.integer  "airline_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "itineraries", :force => true do |t|
@@ -79,15 +79,17 @@ ActiveRecord::Schema.define(:version => 20120405120815) do
     t.boolean  "need_help"
     t.boolean  "willing_to_help"
     t.string   "type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "start_airport_id"
+    t.integer  "dest_airport_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "encrypted_password"
     t.string   "salt"
     t.string   "remember_token"
