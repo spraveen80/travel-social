@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
-  integrate_views
+  render_views
 
   describe "GET 'show'" do
 
@@ -18,12 +18,16 @@ describe UsersController do
 
     it "should have the right title" do
       get :show, :id => @user
-      response.should have_tag("title", /#{@user.name}/)
+      response.body.should have_selector("title") do |f|
+        f.should contain(/#{@user.name}/)
+      end
     end
 
     it "should include the user's name" do
       get :show, :id => @user
-      response.should have_tag("h2", /#{@user.name}/)
+      response.body.should have_selector("h2") do |f|
+        f.should  contain(/#{@user.name}/)
+      end
     end
   end
 
@@ -35,7 +39,9 @@ describe UsersController do
 
     it "should have the right title" do
       get 'new'
-      response.should have_tag("title", /Sign up/)
+      response.body.should have_selector("title") do |f|
+        f.should contain(/Sign up/)
+      end
     end
   end
 
@@ -53,7 +59,9 @@ describe UsersController do
 
       it "should have the right title" do
         post :create, :user => @attr
-        response.should have_tag("title", /sign up/i)
+        response.body.should have_selector("title") do |f|
+          f.contain(/sign up/i)
+        end
       end
 
       it "should render the 'new' page" do

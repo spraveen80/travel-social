@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PagesController do
-  integrate_views
+  render_views
 
   before(:each) do
     @site_title = "Travel Assistance"
@@ -15,7 +15,7 @@ describe PagesController do
 
     it "should have the right title" do
       get 'home'
-      response.should have_tag("title", @site_title + " | Home")
+      response.body.should have_selector('title', :text => @site_title + " | Home")
     end
   end
 
@@ -27,7 +27,7 @@ describe PagesController do
 
     it "should have the right title" do
       get 'contact'
-      response.should have_tag("title", @site_title + " | Contact")
+      response.body.should have_selector('title', :text => @site_title + " | Contact")
     end
   end
 
@@ -39,7 +39,7 @@ describe PagesController do
 
     it "should have the right title" do
       get 'about'
-      response.should have_tag("title", @site_title + " | About")
+      response.body.should have_selector('title', :text => @site_title + " | About")
     end
   end
 
@@ -51,7 +51,7 @@ describe PagesController do
 
     it "should have the right title" do
       get 'help'
-      response.should have_tag("title", @site_title + " | Help")
+      response.body.should have_selector('title', :text => @site_title + " | Help")
     end
   end
 end
