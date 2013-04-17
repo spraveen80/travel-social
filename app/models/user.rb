@@ -30,16 +30,12 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 6..40
 
   before_save   :encrypt_password
+  before_save   :create_remember_token
 
   has_many :itineraries, :dependent => :destroy
 
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
-  end
-
-  def remember_me!
-    self.remember_token = encrypt("#{salt}--#{id}--#{Time.now.utc}")
-#save_without_validation
   end
 
   def self.authenticate(email, submitted_password)
@@ -67,5 +63,9 @@ class User < ActiveRecord::Base
 
     def secure_hash(string)
       Digest::SHA2.hexdigest(string)
+    end
+
+    def create_remember_token
+      self.remember_token = SecureRandom.urlsafe_base64
     end
 end
