@@ -8,7 +8,8 @@ TravelOnRails3::Application.routes.draw do
   match '/signup', to: 'users#new'
 
   resources :users
-  resources :sessions, :only => [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :itineraries, only: [:new, :create, :destroy]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

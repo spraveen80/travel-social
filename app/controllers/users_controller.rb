@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @itineraries = @user.itineraries
     @page_title = @user.name
   end
 

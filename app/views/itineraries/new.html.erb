@@ -1,0 +1,15 @@
+<h2>New Itinerary</h2>
+
+<%= form_for(@itinerary) do |f| %>
+  <% @itinerary.errors.full_messages.each do |msg| %>
+      <div class="flash error"><%= msg %></div>
+   <% end %>
+  <div class="field">
+    <%= f.label :passenger_name %><br />
+    <%= f.text_field :passenger_name %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create" %>
+  </div>
+<% end %>
+
