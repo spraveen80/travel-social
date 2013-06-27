@@ -1,26 +1,28 @@
 <h2>Sign up</h2>
 
 <%= form_for(@user) do |f| %>
-  <% @user.errors.full_messages.each do |msg| %>
-      <div class="flash error"><%= msg %></div>
-   <% end %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirmation" %><br />
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
+  <fieldset>
+    <% @user.errors.full_messages.each do |msg| %>
+        <div class="error"><%= msg %></div>
+     <% end %>
+    <p>
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </p>
+    <p> 
+      <%= f.label :email %><br />
+      <%= f.text_field :email %>
+    </p>
+    <p> 
+      <%= f.label :password %><br />
+      <%= f.password_field :password %>
+    </p>
+    <p> 
+      <%= f.label :password_confirmation, "Confirmation" %><br />
+      <%= f.password_field :password_confirmation %>
+    </p>
+    <p> 
+      <%= f.submit "Sign up" %>
+    </p>
+  </fieldset>
 <% end %>
